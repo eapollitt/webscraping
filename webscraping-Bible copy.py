@@ -5,8 +5,8 @@ from urllib.request import urlopen, Request
 
 
 
-webpage = 'https://ebible.org/asv/JHN'
-
+#webpage = 'https://ebible.org/asv/JHN'
+webpage = 'https://biblehub.com/asv/john/2.htm'
 #number = random[0,21]
 
 
@@ -16,14 +16,14 @@ webpage = 'https://ebible.org/asv/JHN'
 random_chapter = random.randint(1,21)
 
 
-if random_chapter < 10:
-    random_chapter = '0' + str(random_chapter)
-else: 
-    random_chapter = str(random_chapter)
+#if random_chapter < 10:
+    #random_chapter = '0' + str(random_chapter)
+#else: 
+random_chapter = str(random_chapter)
 
 
 
-webpage = 'https://ebible.org/asv/JHN' + random_chapter + '.htm'
+webpage = 'https://biblehub.com/asv/john/' + random_chapter +'.htm'
 
 print(webpage)
 
@@ -43,8 +43,8 @@ req = Request(webpage, headers=headers)
 webpage = urlopen(req).read()
 #print(webpage)
 soup = BeautifulSoup(webpage,'html.parser')
-page_verses = soup.findAll('div', class_='main')
-#print(page_verses)
+page_verses = soup.findAll('span', class_='reftext')
+print(page_verses)
 
 for verse in page_verses:
     verse_list =verse.text.split('.')
@@ -54,7 +54,7 @@ for verse in page_verses:
 
 myverse = random.choice(verse_list[:len(verse_list)-5])
 
-#print(myverse)
+print(myverse)
 
 #print(f"Chapter: {random_chapter}, Verse: {myverse}")
 

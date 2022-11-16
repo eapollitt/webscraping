@@ -31,47 +31,36 @@ soup = BeautifulSoup(webpage, 'html.parser')
 
 title = soup.title
 
-print(title.text)
+#print(title.text)
 
-#movie_name = soup.findAll('a',class_='a-link-normal')
+
+movie_rows = soup.findAll('tr')
+for x in range(1,6):
+    td = movie_rows[x].findAll('td')
+    rank = td[0].text
+    movie_name = td[1].text
+    theater = int(td[6].text.replace(',',''))
+    gross = int(td[7].text.replace(',','').replace('$',''))
+    dis = td[9].text
+
+    avg = gross / theater
+
+    print(f"Rank: {rank}")
+    print(f"Movie Name: {movie_name}")
+    print(f"Total Gross {gross:,.2f}")
+    print(f"Distributor: {dis}")
+    print(f"Average per theater: {avg:,.2f}")
+    print()
+
+
+#movie_name = soup.findAll('a',class_='a-
+#link-normal')
 #print(str(movie_name))
 
 #table = soup.findAll('tr',class_="a-bordered a-horizontal-stripes a-size-base a-span12 mojo-body-table mojo-table-annotated mojo-body-table-compact scrolling-data-table")
 #print(table)
 
-names = soup.findAll('a',class_='a-link-normal')
 
-#print(names)
-
-for name in names:
-    name_list =name.text.split('.')
-    print(name_list)
-    print(name.text)
-
-
-
-grosses= soup.findAll('td',class_="a-text-right mojo-field-type-money mojo-estimatable" ) 
-#print(grosses)
-
-for gross in grosses:
-    gross_list = gross.text.split('.')
-    print(gross_list)
-    print(gross.text)
-
-
-total_grosses = soup.findAll('td',class_="a-text-right mojo-field-type-money mojo-estimatable")
-#print(total_gross)
-for total_gross in total_grosses:
-    total_gross_list = total_gross.text.split('.')
-    print(total_gross_list)
-    print(total_gross.text)
-
-theaters = soup.findAll('td',class_="a-text-right mojo-field-type-positive_integer")
-#print(theater)
-for theater in theaters:
-    theater_list = theater.text.split('.')
-    print(theater_list)
-    print(theater.text)
 
 
 
